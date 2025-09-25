@@ -1,8 +1,8 @@
 ---
-title: tightLoop.software
+title: jam-tomorrow.dev
 ---
 
-# &#x1F300;tightLoop.software
+# jam-tomorrow.dev
 
 > Get the most out of your Frontend Dev Team with Bespoke Technical Solutions
 

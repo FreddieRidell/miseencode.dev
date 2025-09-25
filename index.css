@@ -1,7 +1,4 @@
 * {
-  font-weight: normal;
-  font-size: 1rem;
-  font-family: system-ui;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -167,4 +164,11 @@ main {
 :root,
 html {
   font-size: min(20px, 2.4vw);
+  font-weight: normal;
+  font-size: 1rem;
+  font-family: system-ui;
+}
+
+.sourceCode {
+  font-family: monospace;
 }

@@ -2,4 +2,5 @@
 
 ```javascript
 let x = foo();
+chungus;
 ```

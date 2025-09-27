@@ -4,6 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
+    "vercel-build": "node ./vercelBuild.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,8 @@
   "type": "module",
   "dependencies": {
     "glob": "^11.0.3"
+  },
+  "devDependencies": {
+    "tar": "^7.5.1"
   }
 }

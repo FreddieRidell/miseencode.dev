@@ -1,8 +1,8 @@
 ---
-title: Code én Place
+title: Codé én Placé
 ---
 
-# Code én Place
+# Codé én Placé
 
 > Get the most out of your Frontend Dev Team with Bespoke Technical Solutions
 

@@ -1,8 +1,8 @@
 ---
-title: jam-tomorrow.dev
+title: Code én Place
 ---
 
-# jam-tomorrow.dev
+# Code én Place
 
 > Get the most out of your Frontend Dev Team with Bespoke Technical Solutions
 
@@ -35,26 +35,26 @@ title: jam-tomorrow.dev
 ### Technical Solutions
 
 ```{=html}
-<mock-ci>
-  <ci-step>
-    <label><indicator></indicator> Developers</label>
-    <description>Devs love software solutions, because get to spend less time worrying and more time developing.</description>
-  </ci-step>
+<!-- <mock-ci> -->
+  <!-- <ci-step> -->
+    <!-- <label><indicator></indicator> Developers</label> -->
+    <!-- <description>Devs love software solutions, because get to spend less time worrying and more time developing.</description> -->
+  <!-- </ci-step> -->
 
-  <hr/>
+  <!-- <hr/> -->
 
-  <ci-step>
-    <label><indicator></indicator> Product Owners</label>
-    <description>More certainty</description>
-  </ci-step>
+  <!-- <ci-step> -->
+    <!-- <label><indicator></indicator> Product Owners</label> -->
+    <!-- <description>More certainty</description> -->
+  <!-- </ci-step> -->
 
-  <hr/>
+  <!-- <hr/> -->
 
-  <ci-step>
-    <label><indicator></indicator> Customers</label>
-    <description>Better Product</description>
-  </ci-step>
-</mock-ci>
+  <!-- <ci-step> -->
+    <!-- <label><indicator></indicator> Customers</label> -->
+    <!-- <description>Better Product</description> -->
+  <!-- </ci-step> -->
+<!-- </mock-ci> -->
 ```
 
 ## Testimonials

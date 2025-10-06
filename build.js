@@ -34,21 +34,19 @@ function $(cmd, ...args) {
 
 (async function main() {
   const blogs = [];
-  for (const blogPostFile of await fs.readdir("./site/blog")) {
+  for (const blogPostFile of await fs.readdir("./site")) {
     if (blogPostFile === "index.md") continue;
-    console.log(blogPostFile);
-    blogs.push(path.join("./site/blog", blogPostFile));
+    if (blogPostFile === "posts.md") continue;
+    blogs.push(path.join("./site", blogPostFile));
     // pandoc site/index.md --template=getMetaJson
   }
 
   await fs.writeFile(
-    "./site/blog/index.md",
+    "./site/posts.md",
     [
-      "# Blog",
-      "",
       ...blogs.map(
         (blogFilePath) =>
-          `- [${blogFilePath.replace("site/blog/", "")}](${blogFilePath.replace("site", "").replace(".md", "")})`,
+          `- [${blogFilePath.replace("site/", "")}](${blogFilePath.replace("site", "").replace(".md", "")})`,
       ),
     ].join("\n"),
   );
@@ -64,6 +62,7 @@ function $(cmd, ...args) {
 
       return $(
         "pandoc",
+        "--number-sections",
         "--from",
         "markdown-markdown_in_html_blocks+raw_attribute",
         "--standalone",

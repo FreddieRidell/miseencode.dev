@@ -156,6 +156,12 @@ h4 {
   margin-top: 1rem;
   align-self: start;
 }
+p {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  /* margin-top: 1rem; */
+  align-self: start;
+}
 
 body {
   width: 100%;
@@ -274,4 +280,33 @@ pre.sourceCode {
 
 .sourceCode .dt {
   color: blue;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  position: relative;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+blockquote {
+  align-self: end;
+}
+
+blockquote p {
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.header-section-number {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(calc(-0.25rem - 100%));
 }

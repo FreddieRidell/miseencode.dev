@@ -1,0 +1,52 @@
+html,
+body {
+  background-color: oklch(16% 0.005 285.823);
+  color: oklch(92.8% 0.006 264.531);
+}
+
+header {
+  background-color: oklch(16% 0.005 285.823);
+  box-shadow:
+    oklch(1 0 250 / 0.1) 0px -3px 9px 0px,
+    oklch(1 0 250 / 0.06) 0px 0px 0px 1px;
+}
+
+a {
+  color: initial;
+  font-weight: 500;
+  color: oklch(92.8% 0.006 264.531);
+  &:hover {
+    color: oklch(0.7 0.2 250);
+  }
+}
+
+blockquote {
+  background-color: oklch(0.2398 0.0201 267.83);
+  border-color: oklch(37.2% 0.01 250);
+}
+
+retro-board {
+  background-color: oklch(0.2 0.02 240);
+  background-image: radial-gradient(oklch(0.5 0.03 240), 1px, transparent 0);
+  box-shadow:
+    oklch(1 0 250 / 0.16) 0px 10px 36px 0px,
+    oklch(1 0 250 / 0.06) 0px 0px 0px 1px;
+
+  label {
+    background: oklch(0.2 0.02 240 / 0.7);
+  }
+
+  card {
+    background-color: oklch(0.9823 0.0756 109);
+    color: oklch(0.3 0.1 250);
+
+    box-shadow:
+      oklch(0.5 0.1 109 / 0.4) 0px 2px 4px,
+      oklch(0.5 0.1 109 / 0.3) 0px 7px 13px -3px,
+      oklch(0.5 0.1 109 / 0.2) 0px -3px 0px inset;
+
+    reaction {
+      text-shadow: oklch(0 0 250 / 0.4) 0px 2px 4px;
+    }
+  }
+}

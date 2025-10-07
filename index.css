@@ -1,6 +1,6 @@
 :root,
 html {
-  font-size: min(20px, 2.4vw);
+  font-size: min(20px, 3.5vw);
 }
 
 * {
@@ -37,7 +37,6 @@ main {
 footer {
   padding: 3rem 0 0;
   display: flex;
-
   nav {
     padding: 0rem 1rem;
   }
@@ -51,7 +50,6 @@ a {
 
 blockquote {
   border: 0;
-
   align-self: end;
   background-color: oklch(0.93 0.02 250);
   border-right-width: 0.5rem;
@@ -77,7 +75,7 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin-top: round(down, 1.5em, 0.5rem);
+  margin-top: round(down, 1em, 0.5rem);
 }
 
 .header-section-number {

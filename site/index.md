@@ -1,8 +1,7 @@
 ---
 title: Codé én Placé
+subtitle: Get the most out of your Frontend Dev Team with Bespoke Technical Solutions
 ---
-
-> Get the most out of your Frontend Dev Team with Bespoke Technical Solutions
 
 ## Your Problem
 
@@ -48,7 +47,7 @@ Code en Place isn't a top-down management solution like agile or scrum, it's a b
 
 Web developers are...
 
-Historically low-rigour environment.
+Historically low-rigour environment: Testing done manually, visually, some metrics are "vibes" based, leads to a culture of vibes based acceptance
 
 ```{=html}
 <!-- <mock-ci> -->
@@ -78,6 +77,15 @@ Historically low-rigour environment.
 ### Utiq
 
 ### Measured
+
+## Get In Touch
+
+```{=html}
+<cta>
+  Ready to get started?<br/>
+  <a href="mailto:freddie@codeenplace.dev">Email Me</a> or come say Hi on <a href="https://bsky.app/profile/codeenplace.dev">bluesky</a>.
+</cta>
+```
 
 ```{=html}
 <retro-board>

@@ -5,22 +5,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href="/index.css" rel="stylesheet" />
+    <link href="/base.css" rel="stylesheet" />
+    <link href="/sm.layout.css" rel="stylesheet" media="(max-width:699px)" />
+    <link href="/lg.layout.css" rel="stylesheet" media="(min-width:700px)" />
+    <link href="/light.color.css" rel="stylesheet" media="(prefers-color-scheme:light)" />
+    <link href="/dark.color.css" rel="stylesheet" media="(prefers-color-scheme:dark)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet" />
 
     $if(title)$
     <title>$title$</title>
+    $endif$ $if(subtitle)$
+    <meta name="description" content="$subtitle$" />
     $endif$
   </head>
 
   <body>
+    <header>
+      <h1>$title$</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/posts">Posts</a>
+        <a href="mailto:contact@codeenplace.dev">Contact</a>
+      </nav>
+    </header>
+
     <main>
       <h1>$title$</h1>
+      <subtitle>$subtitle$</subtitle>
+
       $body$
     </main>
 
@@ -29,8 +43,18 @@
       <nav>
         <a href="/">Home</a>
         <a href="/posts">Posts</a>
-        <a href="mailto:contact@jam-tomorrow.dev">Contact</a>
+        <a href="mailto:contact@codeenplace.dev">Contact</a>
       </nav>
     </footer>
+
+    <script>
+      new IntersectionObserver((entries) => {
+        document.querySelector("header h1").style.setProperty("opacity", entries[0].isIntersecting ? 0 : 1);
+        setTimeout(
+          () => document.querySelector("header h1").style.setProperty("transition", "opacity ease-in-out 0.5s"),
+          1,
+        );
+      }).observe(document.querySelector("main h1"));
+    </script>
   </body>
 </html>

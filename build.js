@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "fs/promises";
-import path from "path";
+import pathLib from "path";
 import { spawn } from "node:child_process";
 import { glob } from "glob";
 
@@ -15,21 +15,20 @@ function $(cmd, ...args) {
     });
 
     proc.on("close", (code) => {
-      if (code === 0) {
-        done();
-      } else {
-        fail(code);
-      }
+      if (code === 0) done();
+      else fail(code);
     });
 
     proc.on("exit", (code) => {
-      if (code === 0) {
-        done();
-      } else {
-        fail(code);
-      }
+      if (code === 0) done();
+      else fail(code);
     });
   });
+}
+
+async function writeFile(path, contents) {
+  await fs.mkdir(pathLib.dirname(path), { recursive: true });
+  await fs.writeFile(path, contents);
 }
 
 (async function main() {
@@ -37,13 +36,16 @@ function $(cmd, ...args) {
   for (const blogPostFile of await fs.readdir("./site")) {
     if (blogPostFile === "index.md") continue;
     if (blogPostFile === "posts.md") continue;
-    blogs.push(path.join("./site", blogPostFile));
-    // pandoc site/index.md --template=getMetaJson
+    blogs.push(pathLib.join("./site", blogPostFile));
   }
 
-  await fs.writeFile(
+  await writeFile(
     "./site/posts.md",
     [
+      "---",
+      "title: Codé én Posts",
+      "---",
+
       ...blogs.map(
         (blogFilePath) =>
           `- [${blogFilePath.replace("site/", "")}](${blogFilePath.replace("site", "").replace(".md", "")})`,
@@ -55,10 +57,14 @@ function $(cmd, ...args) {
 
   await Promise.all(
     pages.map(async (pagePath) => {
-      let dst = path.join("target", path.relative("site", pagePath));
-      dst = dst.replace(path.extname(dst), ".html");
+      let dst = pathLib.join("target", pathLib.relative("site", pagePath));
 
-      await fs.mkdir(path.join(dst, ".."), { recursive: true });
+      dst = dst.replace(pathLib.extname(dst), "");
+
+      if (!dst.endsWith("index")) dst = pathLib.join(dst, "index.html");
+      else dst = dst + ".html";
+
+      await fs.mkdir(pathLib.join(dst, ".."), { recursive: true });
 
       return $(
         "pandoc",
@@ -75,5 +81,9 @@ function $(cmd, ...args) {
     }),
   );
 
-  await fs.cp("./index.css", "target/index.css");
+  await Promise.all(
+    ["base", "sm.layout", "lg.layout", "light.color", "dark.color"].map((name) =>
+      fs.cp(`./${name}.css`, `target/${name}.css`),
+    ),
+  );
 })();

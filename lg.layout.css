@@ -28,9 +28,9 @@ main {
 }
 
 footer {
-  padding: 3rem 0 0;
+  padding: 3rem 0;
   display: flex;
-  nav {
+  .spacer {
     padding: 0rem 1rem;
   }
 }
@@ -54,7 +54,7 @@ cta {
 }
 
 main h1 {
-  font-size: 6rem;
+  font-size: 4rem;
   margin-top: 4rem;
 }
 
@@ -66,7 +66,8 @@ header h1 {
 }
 
 subtitle {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
+  padding: 1rem 0rem;
 }
 
 h2 {

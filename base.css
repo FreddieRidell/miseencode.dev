@@ -38,20 +38,20 @@ a {
 }
 
 h1 {
-  font-family: "Parisienne", cursive;
+  /* font-family: "Parisienne", cursive; */
   font-style: normal;
   font-weight: 400;
   line-height: 1;
   align-self: center;
 }
 
-subtitle {
-  font-family: "Parisienne", cursive;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-  align-self: center;
+main h1 {
   text-align: center;
+}
+
+subtitle {
+  align-self: flex-end;
+  text-align: right;
 }
 
 h1,
@@ -61,6 +61,24 @@ h4,
 h5,
 h6 {
   position: relative;
+  text-transform: capitalize;
+}
+
+ul,
+ol {
+  padding: 1rem;
+  padding-right: 0rem;
+}
+li {
+  padding: 0.25rem 0rem;
+}
+
+hr {
+  margin: 1rem;
+}
+
+#footnotes {
+  padding-top: 1rem;
 }
 
 retro-board {

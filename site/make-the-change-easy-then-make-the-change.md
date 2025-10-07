@@ -1,6 +1,7 @@
 ---
 title: Make the Change Easy, Then Make the Change
 subtitle: Rare universal coding advice
+published: 2026-03-01
 ---
 
 There have been many attempts to produce universal advice for writing code.

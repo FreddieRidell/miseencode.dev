@@ -40,10 +40,10 @@ async function writeFile(path, contents) {
   }
 
   await writeFile(
-    "./site/posts.md",
+    "./site/index.md",
     [
       "---",
-      "title: Codé én Posts",
+      "title: Codé én Placé",
       "---",
 
       ...blogs.map(

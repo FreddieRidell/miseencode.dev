@@ -6,6 +6,8 @@ title: Codé én Placé
 
 ## Your Problem
 
+Seemingly simple tickets taking two sprints to resolve.
+
 ```{=html}
 <retro-board>
   <label>Today's Retro</label>
@@ -28,23 +30,25 @@ title: Codé én Placé
 
 ## Our Solution
 
-### Technical Solutions
+### Bespoke
+
+> Every team is different, so we don't offer a one-size-fits-all solution.
+
+We get embedded in your team, establish the root cause of your problems, and implement tooling and workflows that work for _your_ team.
+
+### Technical
 
 > A team can only be as effective as their tooling lets them be.
 
 Code en Place isn't a top-down management solution like agile or scrum, it's a bottom up rethinking of the automation and tooling at the core of your developer's day-to-day.
 
-### Bespoke Solutions
-
-> Every team is different, so we don't offer a one-size-fits-all solution.
-
-We get embedded in your team, establish the root cause of your problems, and implement tooling and workflows that work for _you_.
-
-### Frontend Code
+### Frontend
 
 > Frontend Code demands Frontend Solutions.
 
-Web developers are often
+Web developers are...
+
+Historically low-rigour environment.
 
 ```{=html}
 <!-- <mock-ci> -->
@@ -80,17 +84,16 @@ Web developers are often
   <label>Next Retro</label>
   <card>
     <div>No Regressions this week!</div>
-    <reaction>&#x1F62D;</reaction>
-    <reaction>&#x1F44E;</reaction>
+    <reaction> ❤️ </reaction>
+    <reaction>⭐</reaction>
   </card>
   <card>
     <div>Velocity is up</div>
-    <reaction>&#x1F480;</reaction>
+    <reaction>📈</reaction>
   </card>
   <card>
     <div>Working on PRs is much easier now</div>
-    <reaction>&#x1F928;</reaction>
-    <reaction>&#x1F626;</reaction>
+    <reaction>🚀</reaction>
   </card>
 </retro-board>
 ```

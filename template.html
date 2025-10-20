@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="/index.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
 
     $if(title)$
     <title>$title$</title>
@@ -13,16 +19,13 @@
   </head>
 
   <body>
-    <!-- <header> -->
-    <!-- </header> -->
     <main>
       <h1>$title$</h1>
-
       $body$
     </main>
-    <footer>
-      (c) Freddie Ridell
 
+    <footer>
+      <div>(c) Freddie Ridell</div>
       <nav>
         <a href="/">Home</a>
         <a href="/posts">Posts</a>

@@ -66,6 +66,8 @@ async function writeFile(path, contents) {
 
       await fs.mkdir(pathLib.join(dst, ".."), { recursive: true });
 
+      const pageSlug = pathLib.relative("site", pagePath).replace(/\.md$/, "").replace(/\\/g, "/");
+
       return $(
         "pandoc",
         "--number-sections",
@@ -73,6 +75,8 @@ async function writeFile(path, contents) {
         "markdown-markdown_in_html_blocks+raw_attribute",
         "--standalone",
         "--template=template.html",
+        "--variable",
+        `pageslug:${pageSlug}`,
         "-i",
         pagePath,
         "-o",

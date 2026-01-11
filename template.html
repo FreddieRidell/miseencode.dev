@@ -19,6 +19,30 @@
     $endif$ $if(subtitle)$
     <meta name="description" content="$subtitle$" />
     $endif$
+    <meta name="author" content="Freddie Ridell" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Code en Place" />
+    $if(title)$
+    <meta property="og:title" content="$title$" />
+    $endif$ $if(subtitle)$
+    <meta property="og:description" content="$subtitle$" />
+    $endif$ $if(url)$
+    <meta property="og:url" content="$url$" />
+    $endif$ $if(pageslug)$
+    <meta property="og:image" content="https://codeenplace.dev/img/social/$pageslug$.png" />
+    $endif$
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    $if(title)$
+    <meta name="twitter:title" content="$title$" />
+    $endif$ $if(subtitle)$
+    <meta name="twitter:description" content="$subtitle$" />
+    $endif$ $if(pageslug)$
+    <meta name="twitter:image" content="https://codeenplace.dev/img/social/$pageslug$.png" />
+    $endif$
   </head>
 
   <body>

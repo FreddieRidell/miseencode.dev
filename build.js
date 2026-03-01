@@ -40,6 +40,9 @@ async function writeFile(path, contents) {
   for (const blogPostFile of await fs.readdir("./site")) {
     if (blogPostFile === "index.md") continue;
     if (blogPostFile === "posts.md") continue;
+    const src = await fs.readFile(pathLib.join("./site", blogPostFile), "utf-8");
+    const fm = src.match(/^---\n([\s\S]*?)\n---/);
+    if (fm && /^hidden:\s*true$/m.test(fm[1])) continue;
     blogs.push(pathLib.join("./site", blogPostFile));
   }
 

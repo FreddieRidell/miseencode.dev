@@ -40,6 +40,4 @@ Look, man, sometimes you just need to get the ticket merged. The downside to thi
 
 The good news is that this advice isn't just applicable when initially making the change. Once you've freed up some time you can go back and "make what the code's doing easy", gaining all the same benefits as if you'd done it properly the first time.
 
----
-
 [LindyEffect]: https://en.wikipedia.org/wiki/Lindy_effect

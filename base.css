@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  line-height: round(up, 1.5em, 0.5rem);
+  line-height: round(up, 1.25em, 0.5rem);
 }
 
 body {

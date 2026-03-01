@@ -26,6 +26,10 @@ function $(cmd, ...args) {
   });
 }
 
+function typstEscape(s) {
+  return s.replace(/[#\[\]\\]/g, (c) => "\\" + c);
+}
+
 async function writeFile(path, contents) {
   await fs.mkdir(pathLib.dirname(path), { recursive: true });
   await fs.writeFile(path, contents);
@@ -89,5 +93,40 @@ async function writeFile(path, contents) {
     ["base", "sm.layout", "lg.layout", "light.color", "dark.color"].map((name) =>
       fs.cp(`./${name}.css`, `target/${name}.css`),
     ),
+  );
+
+  await Promise.all(
+    pages.map(async (pagePath) => {
+      const src = await fs.readFile(pagePath, "utf-8");
+      const fm = src.match(/^---\n([\s\S]*?)\n---/);
+      if (!fm) return;
+
+      const title = fm[1].match(/^title:\s*(.+)$/m)?.[1]?.trim();
+      if (!title) return;
+      const subtitle = fm[1].match(/^subtitle:\s*(.+)$/m)?.[1]?.trim();
+      const published = fm[1].match(/^published:\s*(.+)$/m)?.[1]?.trim();
+
+      const slug = pathLib.relative("site", pagePath).replace(/\.md$/, "").replace(/\\/g, "/");
+      const typstPath = `target/img/social/${slug}.typ`;
+      const pngPath = `target/img/social/${slug}.png`;
+
+      await fs.mkdir(pathLib.dirname(typstPath), { recursive: true });
+
+      await writeFile(
+        typstPath,
+        [
+          `#set page(width: 1200pt, height: 630pt, margin: 60pt, fill: oklch(16%, 0.005, 285.823deg))`,
+          `#set text(fill: oklch(92.8%, 0.006, 264.531deg), font: "system-ui")`,
+          ``,
+          `#align(left + top)[#text(size: 96pt, weight: "bold")[${typstEscape(title)}]]`,
+          subtitle ? `#align(left + bottom)[#text(size: 48pt)[${typstEscape(subtitle)}]]` : "",
+          published ? `#align(right + bottom)[#text(size: 48pt)[${typstEscape(published)}]]` : "",
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      );
+
+      return $("typst", "compile", "--format", "png", typstPath, pngPath);
+    }),
   );
 })();

@@ -66,7 +66,7 @@ h6 {
 
 ul,
 ol {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   padding-right: 0rem;
 }
 li {
@@ -75,6 +75,10 @@ li {
 
 hr {
   margin: 1rem;
+}
+
+p {
+  margin: 0.25rem 0;
 }
 
 #footnotes {

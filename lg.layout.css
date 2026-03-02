@@ -62,16 +62,26 @@ header h1 {
   font-size: 2rem;
   flex: 1;
   padding-left: 1rem;
-  transform: translateY(10%);
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  #post-title {
+    display: auto;
+  }
+  #site-title {
+    display: none;
+  }
 }
 
 subtitle {
   font-size: 1.75rem;
-  padding: 1rem 0rem;
+  padding: 1.5rem 0rem;
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 h3 {
   font-size: 1.5rem;
@@ -86,6 +96,7 @@ h4,
 h5,
 h6 {
   margin-top: round(down, 0.25em, 0.25rem);
+  margin-bottom: round(down, 0.25em, 0.25rem);
 }
 
 h2:not(:is(h1, h2, h3, h4, h5, h6) + *),

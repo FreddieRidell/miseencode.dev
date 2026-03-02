@@ -70,16 +70,25 @@ main h1 {
 }
 
 header h1 {
-  display: none;
+  font-size: 2rem;
+  flex: 1;
+  padding-left: 1rem;
+
+  #post-title {
+    display: none;
+  }
+  #site-title {
+    display: auto;
+  }
 }
 
 subtitle {
   font-size: 1.75rem;
-  padding: 1rem 0rem;
+  padding: 1.5rem 0rem;
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 h3 {
   font-size: 1.5rem;
@@ -94,6 +103,7 @@ h4,
 h5,
 h6 {
   margin-top: round(down, 0.25em, 0.25rem);
+  margin-bottom: round(down, 0.25em, 0.25rem);
 }
 
 h2:not(:is(h1, h2, h3, h4, h5, h6) + *),

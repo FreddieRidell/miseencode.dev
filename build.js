@@ -14,6 +14,10 @@ function $(cmd, ...args) {
       console.log(`stdout: ${data}`);
     });
 
+    proc.stderr.on("data", (data) => {
+      console.error(`stderr: ${data}`);
+    });
+
     proc.on("close", (code) => {
       if (code === 0) done();
       else fail(code);
@@ -92,11 +96,12 @@ async function writeFile(path, contents) {
     }),
   );
 
-  await Promise.all(
-    ["base", "sm.layout", "lg.layout", "light.color", "dark.color"].map((name) =>
+  await Promise.all([
+    ...["base", "sm.layout", "lg.layout", "light.color", "dark.color", "fonts"].map((name) =>
       fs.cp(`./${name}.css`, `target/${name}.css`),
     ),
-  );
+    fs.cp("./assets/fonts", "target/fonts", { recursive: true }),
+  ]);
 
   await Promise.all(
     pages.map(async (pagePath) => {
@@ -119,17 +124,39 @@ async function writeFile(path, contents) {
         typstPath,
         [
           `#set page(width: 1200pt, height: 630pt, margin: 60pt, fill: oklch(16%, 0.005, 285.823deg))`,
-          `#set text(fill: oklch(92.8%, 0.006, 264.531deg), font: "system-ui")`,
+          `#set text(fill: oklch(92.8%, 0.006, 264.531deg), font: "Nunito Sans")`,
           ``,
           `#align(left + top)[#text(size: 96pt, weight: "bold")[${typstEscape(title)}]]`,
-          subtitle ? `#align(left + bottom)[#text(size: 48pt)[${typstEscape(subtitle)}]]` : "",
-          published ? `#align(right + bottom)[#text(size: 48pt)[${typstEscape(published)}]]` : "",
+          subtitle ? `#align(left + bottom)[#text(size: 72pt)[${typstEscape(subtitle)}]]` : "",
+          `#align(bottom)[#grid(columns: (1fr, 1fr), align: (left, right), text(size: 48pt)[codeenplace.dev], text(size: 48pt)[${published ? typstEscape(published) : ""}])]`,
         ]
           .filter(Boolean)
           .join("\n"),
       );
 
-      return $("typst", "compile", "--format", "png", typstPath, pngPath);
+      return $("typst", "compile", "--font-path", "assets/fonts/nunito-sans", "--format", "png", typstPath, pngPath);
+    }),
+  );
+
+  const faviconSizes = [32, 180, 192, 512];
+  await fs.mkdir("target/img/favicon", { recursive: true });
+
+  await Promise.all(
+    faviconSizes.map(async (size) => {
+      const fontSize = Math.round(size * 0.45);
+      const typstPath = `target/img/favicon/favicon-${size}.typ`;
+      const pngPath = `target/img/favicon/favicon-${size}.png`;
+
+      await writeFile(
+        typstPath,
+        [
+          `#set page(width: ${size}pt, height: ${size}pt, margin: 0pt, fill: oklch(16%, 0.005, 285.823deg))`,
+          `#set text(fill: oklch(92.8%, 0.006, 264.531deg), font: "Nunito Sans")`,
+          `#align(center + horizon)[#text(size: ${fontSize}pt, weight: "bold")[CèP]]`,
+        ].join("\n"),
+      );
+
+      return $("typst", "compile", "--font-path", "assets/fonts/nunito-sans", "--ppi", "72", "--format", "png", typstPath, pngPath);
     }),
   );
 })();

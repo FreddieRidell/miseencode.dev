@@ -41,6 +41,7 @@ async function writeFile(path, contents) {
 
 (async function main() {
   const blogs = [];
+  const blogMeta = [];
   for (const blogPostFile of await fs.readdir("./site")) {
     if (blogPostFile === "index.md") continue;
     if (blogPostFile === "posts.md") continue;
@@ -48,7 +49,18 @@ async function writeFile(path, contents) {
     const fm = src.match(/^---\n([\s\S]*?)\n---/);
     if (fm && /^hidden:\s*true$/m.test(fm[1])) continue;
     blogs.push(pathLib.join("./site", blogPostFile));
+
+    const title = fm?.[1].match(/^title:\s*(.+)$/m)?.[1]?.trim() ?? blogPostFile;
+    const subtitle = fm?.[1].match(/^subtitle:\s*(.+)$/m)?.[1]?.trim() ?? "";
+    const published = fm?.[1].match(/^published:\s*(.+)$/m)?.[1]?.trim() ?? "";
+    const body = src.replace(/^---\n[\s\S]*?\n---\n*/, "");
+    const excerpt = body.split("\n").filter(l => l.trim() && !l.startsWith("#")).slice(0, 3).join(" ").slice(0, 300);
+    const slug = blogPostFile.replace(/\.md$/, "");
+
+    blogMeta.push({ title, subtitle, published, excerpt, slug });
   }
+
+  blogMeta.sort((a, b) => (b.published || "").localeCompare(a.published || ""));
 
   await writeFile(
     "./site/index.md",
@@ -63,6 +75,66 @@ async function writeFile(path, contents) {
       ),
     ].join("\n"),
   );
+
+  const siteUrl = "https://codeenplace.dev";
+  const siteTitle = "Codè èn Placè";
+  const siteDescription = "Freddie Ridell's blog";
+  const now = new Date().toISOString();
+
+  function xmlEscape(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  const rss = [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">`,
+    `<channel>`,
+    `<title>${xmlEscape(siteTitle)}</title>`,
+    `<link>${siteUrl}</link>`,
+    `<description>${xmlEscape(siteDescription)}</description>`,
+    `<language>en</language>`,
+    `<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
+    `<atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml"/>`,
+    ...blogMeta.filter(p => p.published).map(p => [
+      `<item>`,
+      `<title>${xmlEscape(p.title)}</title>`,
+      `<link>${siteUrl}/${p.slug}</link>`,
+      `<guid>${siteUrl}/${p.slug}</guid>`,
+      `<pubDate>${new Date(p.published + "T00:00:00Z").toUTCString()}</pubDate>`,
+      `<description>${xmlEscape(p.subtitle ? p.subtitle + " — " + p.excerpt : p.excerpt)}</description>`,
+      `</item>`,
+    ].join("\n")),
+    `</channel>`,
+    `</rss>`,
+  ].join("\n");
+
+  const atom = [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<feed xmlns="http://www.w3.org/2005/Atom">`,
+    `<title>${xmlEscape(siteTitle)}</title>`,
+    `<subtitle>${xmlEscape(siteDescription)}</subtitle>`,
+    `<link href="${siteUrl}" rel="alternate"/>`,
+    `<link href="${siteUrl}/atom.xml" rel="self"/>`,
+    `<id>${siteUrl}/</id>`,
+    `<updated>${now}</updated>`,
+    `<author><name>Freddie Ridell</name></author>`,
+    ...blogMeta.filter(p => p.published).map(p => [
+      `<entry>`,
+      `<title>${xmlEscape(p.title)}</title>`,
+      `<link href="${siteUrl}/${p.slug}"/>`,
+      `<id>${siteUrl}/${p.slug}</id>`,
+      `<published>${p.published}T00:00:00Z</published>`,
+      `<updated>${p.published}T00:00:00Z</updated>`,
+      `<summary>${xmlEscape(p.subtitle ? p.subtitle + " — " + p.excerpt : p.excerpt)}</summary>`,
+      `</entry>`,
+    ].join("\n")),
+    `</feed>`,
+  ].join("\n");
+
+  await Promise.all([
+    writeFile("target/feed.xml", rss),
+    writeFile("target/atom.xml", atom),
+  ]);
 
   const pages = await glob("./site/**/*.md");
 

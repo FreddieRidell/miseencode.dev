@@ -195,12 +195,16 @@ async function writeFile(path, contents) {
       await writeFile(
         typstPath,
         [
-          `#set page(width: 1200pt, height: 630pt, margin: 60pt, fill: oklch(16%, 0.005, 285.823deg))`,
-          `#set text(fill: oklch(92.8%, 0.006, 264.531deg), font: "Nunito Sans")`,
+          `#set page(width: 1200pt, height: 630pt, margin: 100pt, fill: oklch(16%, 0.005, 285.823deg))`,
+          `#let fg = oklch(92.8%, 0.006, 264.531deg)`,
+          `#let muted = oklch(92.8%, 0.006, 264.531deg, 75%)`,
+          `#set text(fill: fg, font: "Nunito Sans")`,
           ``,
-          `#align(left + top)[#text(size: 96pt, weight: "bold")[${typstEscape(title)}]]`,
-          subtitle ? `#align(left + bottom)[#text(size: 72pt)[${typstEscape(subtitle)}]]` : "",
-          `#align(bottom)[#grid(columns: (1fr, 1fr), align: (left, right), text(size: 48pt)[codeenplace.dev], text(size: 48pt)[${published ? typstEscape(published) : ""}])]`,
+          `#grid(rows: (auto, 1fr, auto),`,
+          `  text(size: 64pt, weight: "bold")[${typstEscape(title)}],`,
+          subtitle ? `  align(left + horizon)[#text(size: 40pt)[${typstEscape(subtitle)}]],` : `  [],`,
+          `  grid(columns: (1fr, 1fr), align: (left, right), text(size: 32pt, fill: muted)[codeenplace.dev], text(size: 32pt, fill: muted)[${published ? typstEscape(published) : ""}]),`,
+          `)`,
         ]
           .filter(Boolean)
           .join("\n"),

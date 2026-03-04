@@ -39,18 +39,23 @@
     <meta name="description" content="$subtitle$" />
     $endif$
     <meta name="author" content="Freddie Ridell" />
+    <meta name="theme-color" content="#282729" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#e8e5eb" media="(prefers-color-scheme: light)" />
+    $if(pageslug)$
+    <link rel="canonical" href="https://codeenplace.dev/$pageslug$" />
+    $endif$
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <!-- Open Graph -->
     <meta property="og:site_name" content="Codè èn Placè" />
+    $if(pageslug)$
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://codeenplace.dev/$pageslug$" />
+    <meta property="og:image" content="https://codeenplace.dev/img/social/$pageslug$.png" />
+    $endif$
     $if(title)$
     <meta property="og:title" content="$title$" />
     $endif$ $if(subtitle)$
     <meta property="og:description" content="$subtitle$" />
-    $endif$ $if(url)$
-    <meta property="og:url" content="$url$" />
-    $endif$ $if(pageslug)$
-    <meta property="og:image" content="https://codeenplace.dev/img/social/$pageslug$.png" />
     $endif$
 
     <!-- Twitter -->
